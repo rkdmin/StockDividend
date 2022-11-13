@@ -9,6 +9,8 @@ import com.zerobase.StockDividend.scraper.Scraper;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -45,5 +47,9 @@ public class CompanyService {
         this.dividendRepository.saveAll(dividendEntityList);
 
         return company;
+    }
+
+    public Page<Company> getAllCompany(Pageable pageable){
+        return this.companyRepository.findAll(pageable);
     }
 }
