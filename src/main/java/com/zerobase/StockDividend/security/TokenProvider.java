@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 @Component
 @RequiredArgsConstructor
 public class TokenProvider {
-    @Value("{spring.jwt.secret")
+    @Value("{spring.jwt.secret}")
     private String secretKey;
     private static final String KEY_ROLES = "roles";
     private static final long TOKEN_EXPIRE_TIME = 1000 * 60 * 60;// 1시간
