@@ -5,7 +5,9 @@ Content-Type: application/json
 {
   "username": "admin12",
   "password": "abc1234!",
-  "roles": "ROLE_MANAGER",
+  "roles": [
+    "ROLE_USER"
+  ],
   "email": "22rkdmin@nav2er.com"
 }
 
