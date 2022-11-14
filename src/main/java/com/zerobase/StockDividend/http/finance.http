@@ -1,5 +1,5 @@
 
 ### 배당금 조회
-GET http://localhost:8080/finance/dividend/Realty Income Corporation
+GET http://localhost:8080/finance/dividend/3M Company
 Accept: application/json
 

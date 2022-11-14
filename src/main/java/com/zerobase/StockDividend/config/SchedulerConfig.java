@@ -9,7 +9,7 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 public class SchedulerConfig implements SchedulingConfigurer {
 
     // 여러개의 쓰레드를 관리
-    // 하나의 쓰레드를 쓰니까 스케쥴에 이슈가 생김 
+    // 하나의 쓰레드를 쓰니까 스케쥴에 이슈가 생김
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         ThreadPoolTaskScheduler threadPool = new ThreadPoolTaskScheduler();

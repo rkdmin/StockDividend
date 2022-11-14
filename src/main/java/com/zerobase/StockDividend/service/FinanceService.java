@@ -10,7 +10,7 @@ import com.zerobase.StockDividend.repository.DividendRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.collection.internal.PersistentList;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +19,7 @@ public class FinanceService {
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
+    @Cacheable(key = "#companyName", value = "finance")
     public ScrapedResult getDividendByCompanyName(String companyName){
         // 1. 회사명을 기준으로 회사 정보를 조회
         Company company = companyRepository.findByName(companyName).orElseThrow(
