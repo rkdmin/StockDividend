@@ -1,5 +1,6 @@
 package com.zerobase.StockDividend.entity;
 
+import com.zerobase.StockDividend.dto.DividendDto;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,9 +30,9 @@ public class Dividend {
 
     private String dividend;
 
-    public Dividend(Long companyId, Dividend dividend){
+    public Dividend(Long companyId, DividendDto dividendDto){
         this.companyId = companyId;
-        this.date = dividend.getDate();
-        this.dividend = dividend.getDividend();
+        this.date = dividendDto.getDate();
+        this.dividend = dividendDto.getDividend();
     }
 }

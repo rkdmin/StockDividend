@@ -10,6 +10,10 @@ Content-Type: application/json
 GET http://localhost:8080/company
 Accept: application/json
 
+### 회사 조회
+GET http://localhost:8080/finance/diviend/Realty Income Corporation
+Accept: application/json
+
 ### 브랜드 수정
 PATCH http://localhost:8080/admin/brand/edit
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiUk9MRV9BRE1JTiIsImlhdCI6MTY2NzQ4ODA4MCwiZXhwIjoxNjY3NDkxNjgwfQ.q76Iu_J4mdLa_OvVUGGFLrn-uPQnwpxk_LTJV2rNMaAW-BzySHyVfB09uDwvisLsEs2UM_M2ZgASHyjjcPHFAw

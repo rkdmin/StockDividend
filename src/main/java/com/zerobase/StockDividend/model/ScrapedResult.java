@@ -1,5 +1,7 @@
 package com.zerobase.StockDividend.model;
 
+import com.zerobase.StockDividend.dto.CompanyDto;
+import com.zerobase.StockDividend.dto.DividendDto;
 import com.zerobase.StockDividend.entity.Company;
 import com.zerobase.StockDividend.entity.Dividend;
 import java.util.ArrayList;
@@ -15,10 +17,10 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class ScrapedResult {
-    private Company company;
-    private List<Dividend> dividendList;
+    private CompanyDto companyDto;
+    private List<DividendDto> dividendDtoList;
 
     public ScrapedResult(){
-        this.dividendList = new ArrayList<>();
+        this.dividendDtoList = new ArrayList<>();
     }
 }

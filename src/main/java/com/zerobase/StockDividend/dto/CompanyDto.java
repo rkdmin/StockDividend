@@ -12,7 +12,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyDto {
-    private Long id;
     private String ticker;
     private String name;
 }

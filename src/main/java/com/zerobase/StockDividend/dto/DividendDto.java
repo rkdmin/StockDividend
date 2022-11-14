@@ -13,7 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DividendDto {
-
     private LocalDateTime date;
     private String dividend;
 }

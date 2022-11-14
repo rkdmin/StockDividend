@@ -1,5 +1,7 @@
 package com.zerobase.StockDividend.scraper;
 
+import com.zerobase.StockDividend.dto.CompanyDto;
+import com.zerobase.StockDividend.dto.DividendDto;
 import com.zerobase.StockDividend.model.Month;
 import com.zerobase.StockDividend.model.ScrapedResult;
 import com.zerobase.StockDividend.entity.Company;
@@ -22,14 +24,14 @@ public class YahooFinanceScraper implements Scraper{
 private static final long START_TIME = 86400;// 60 * 60 * 24
 
     @Override
-    public ScrapedResult scrap(Company company){
+    public ScrapedResult scrap(CompanyDto companyDto){
         var scrapResult = new ScrapedResult();
-        scrapResult.setCompany(company);
+        scrapResult.setCompanyDto(companyDto);
 
         try {
             long now = System.currentTimeMillis() / 1000;
 
-            String url = String.format(STATISTICS_URL, company.getTicker(), START_TIME, now);
+            String url = String.format(STATISTICS_URL, companyDto.getTicker(), START_TIME, now);
             Connection connection = Jsoup.connect(url);
             Document document = connection.get();
             Elements parsingDivs = document.getElementsByAttributeValue("data-test", "historical-prices");
@@ -37,7 +39,7 @@ private static final long START_TIME = 86400;// 60 * 60 * 24
 
             Element tbody = tableEle.children().get(1);
 
-            List<Dividend> dividendList = new ArrayList<>();
+            List<DividendDto> dividendDtoList = new ArrayList<>();
             for(Element e: tbody.children()){
                 String txt = e.text();
                 if(!txt.endsWith("Dividend")){
@@ -54,12 +56,12 @@ private static final long START_TIME = 86400;// 60 * 60 * 24
                     throw new RuntimeException("Unexpected Month enum value -> " + splits[0]);
                 }
 
-                dividendList.add(Dividend.builder()
+                dividendDtoList.add(DividendDto.builder()
                     .date(LocalDateTime.of(year, month, day, 0, 0))
                     .dividend(dividend)
                     .build());
             }
-            scrapResult.setDividendList(dividendList);
+            scrapResult.setDividendDtoList(dividendDtoList);
 
         }catch(IOException e){
             e.printStackTrace();
@@ -69,7 +71,7 @@ private static final long START_TIME = 86400;// 60 * 60 * 24
     }
 
     @Override
-    public Company scrapCompanyByTicker(String ticker){
+    public CompanyDto scrapCompanyByTicker(String ticker){
         String url = String.format(SUMMARY_URL, ticker, ticker);
 
         try{
@@ -77,7 +79,7 @@ private static final long START_TIME = 86400;// 60 * 60 * 24
             Element titleEle = document.getElementsByTag("h1").get(0);
             String title = titleEle.text().split(" - ")[1].trim();// 앞 뒤 공백 제거(trim)
 
-            return Company.builder()
+            return CompanyDto.builder()
                 .ticker(ticker)
                 .name(title)
                 .build();

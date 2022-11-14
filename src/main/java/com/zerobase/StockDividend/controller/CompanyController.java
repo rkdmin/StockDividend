@@ -42,9 +42,9 @@ public class CompanyController {
         if(ObjectUtils.isEmpty(ticker)){
             throw new RuntimeException("ticker is empty");
         }
-        Company company = this.companyService.save(ticker);
+        CompanyDto companyDto = this.companyService.save(ticker);
 
-        return ResponseEntity.ok(company);
+        return ResponseEntity.ok(companyDto);
     }
 
     @DeleteMapping

@@ -1,5 +1,6 @@
 package com.zerobase.StockDividend.entity;
 
+import com.zerobase.StockDividend.dto.CompanyDto;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +27,8 @@ public class Company {
 
     private String name;
 
-    public Company(Company company){
-        this.ticker = company.getTicker();
-        this.name = company.getName();
+    public Company(CompanyDto companyDto){
+        this.ticker = companyDto.getTicker();
+        this.name = companyDto.getName();
     }
 }
