@@ -1,11 +1,11 @@
 package com.zerobase.StockDividend;
 
-import com.zerobase.StockDividend.entity.Company;
-import com.zerobase.StockDividend.scraper.YahooFinanceScraper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class StockDividendApplication {
 
     public static void main(String[] args) {
