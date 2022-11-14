@@ -19,7 +19,7 @@ import org.springframework.util.ObjectUtils;
 @Service
 @RequiredArgsConstructor
 public class CompanyService {
-    private final Trie trie;
+    private final Trie trie;// config에서 Bean으로 생성되어 공용으로 사용가능
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
     private final Scraper yahooFinanceScraper;
@@ -54,5 +54,20 @@ public class CompanyService {
 
     public Page<Company> getAllCompany(Pageable pageable){
         return this.companyRepository.findAll(pageable);
+    }
+
+    public void addAutoCompleteKeyword(String keyword){
+        this.trie.put(keyword, null);// 자동완성기능만 구현할것이기에 value는 null넣음
+    }
+
+    public List<String> autocomplete(String keyword){
+        return (List<String>) this.trie.prefixMap(keyword).keySet()
+            .stream()
+            .limit(10)// 10개로 제한
+            .collect(Collectors.toList());
+    }
+
+    public void deleteAutocompleteKeyword(String keyword){
+        this.trie.remove(keyword);
     }
 }
