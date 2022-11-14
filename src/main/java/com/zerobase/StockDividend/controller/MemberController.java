@@ -33,7 +33,7 @@ public class MemberController {
         Member member = memberService.login(request);
 
         String token = tokenProvider.generateToken(member.getUsername(), member.getRoles());
-
+        log.info("user login -> " + request.getUsername());
         return token;
     }
 }

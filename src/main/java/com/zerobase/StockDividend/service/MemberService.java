@@ -1,8 +1,10 @@
 package com.zerobase.StockDividend.service;
 
 import com.zerobase.StockDividend.entity.Member;
+import com.zerobase.StockDividend.exception.impl.AlreadyExistUserException;
 import com.zerobase.StockDividend.model.Auth;
 import com.zerobase.StockDividend.repository.MemberRepository;
+import java.nio.channels.AlreadyBoundException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,7 @@ public class MemberService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return this.memberRepository.findByUsername(username)
-            .orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다."));
+            .orElseThrow(() -> new AlreadyExistUserException());
     }
 
     public Member register(Auth.SignUp request){

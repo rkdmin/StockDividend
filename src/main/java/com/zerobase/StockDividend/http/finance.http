@@ -1,6 +1,6 @@
 
 ### 배당금 조회
-GET http://localhost:8080/finance/dividend/3M Company
+GET http://localhost:8080/finance/dividend/3M Compa2ny
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfUkVBRCIsIlJPTEVfV1JJVEUiXSwiaWF0IjoxNjY4NDM1NjU1LCJleHAiOjE2Njg0MzkyNTV9.uPOolOwCi-ktzVk1SyInGiFiNZzk0vSmLScxMgYg7w0-s6-5twjAVyMQpCbqPBOGaKtANNhJY5Aj8691f8_39g
 Accept: application/json
 
