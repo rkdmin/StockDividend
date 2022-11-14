@@ -4,12 +4,14 @@ import com.zerobase.StockDividend.dto.CompanyDto;
 import com.zerobase.StockDividend.dto.DividendDto;
 import com.zerobase.StockDividend.entity.Company;
 import com.zerobase.StockDividend.entity.Dividend;
+import com.zerobase.StockDividend.model.CacheKey;
 import com.zerobase.StockDividend.model.ScrapedResult;
 import com.zerobase.StockDividend.repository.CompanyRepository;
 import com.zerobase.StockDividend.repository.DividendRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class FinanceService {
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
-    @Cacheable(key = "#companyName", value = "finance")
+    @Cacheable(key = "#companyName", value = CacheKey.KEY_FINANCE)
     public ScrapedResult getDividendByCompanyName(String companyName){
         // 1. 회사명을 기준으로 회사 정보를 조회
         Company company = companyRepository.findByName(companyName).orElseThrow(

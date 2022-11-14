@@ -3,6 +3,7 @@ package com.zerobase.StockDividend.scheduler;
 import com.zerobase.StockDividend.dto.CompanyDto;
 import com.zerobase.StockDividend.entity.Company;
 import com.zerobase.StockDividend.entity.Dividend;
+import com.zerobase.StockDividend.model.CacheKey;
 import com.zerobase.StockDividend.model.ScrapedResult;
 import com.zerobase.StockDividend.repository.CompanyRepository;
 import com.zerobase.StockDividend.repository.DividendRepository;
@@ -10,6 +11,7 @@ import com.zerobase.StockDividend.scraper.Scraper;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,8 @@ public class ScraperScheduler {
     private final Scraper yahooFinanceScraper;
 
     // 매시 정각
+    //@CacheEvict(value = "finance", key = "MMM")// finance에 key로 데이터를 찾아 그거만 지움
+    @CacheEvict(value = CacheKey.KEY_FINANCE, allEntries = true)// value캐시에 있는 모든 데이터를 다 지움
     @Scheduled(cron = "${scheduler.scrap.yahoo}")
     public void yahooFinanceScheduling(){
         log.info("scraping scheduler is started");

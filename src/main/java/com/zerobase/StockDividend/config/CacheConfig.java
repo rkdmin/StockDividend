@@ -1,5 +1,6 @@
 package com.zerobase.StockDividend.config;
 
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
@@ -34,7 +35,9 @@ public class CacheConfig {
         RedisCacheConfiguration conf = RedisCacheConfiguration.defaultCacheConfig()
             // key와 value 직렬화(데이터를 바이트 형태로 변경) 방법을 설정
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
+            // .entryTtl(Duration.of()) 캐시데이터 전부에 유효기간을 설정함 일정 데이터만 고를 수 있는 방법도 있음
+             ;
 
         return RedisCacheManager.RedisCacheManagerBuilder
             .fromConnectionFactory(redisConnectionFactory)
